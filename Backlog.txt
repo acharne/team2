@@ -1,0 +1,10 @@
+Project backlog
+
+-setup Github
+-Complete Use-case diagram
+-User Stories
+-make Class diagram
+-Make Junit Tests
+-Complete Rules document
+-Create Japplet/GUI design
+-decide what statistics to track
