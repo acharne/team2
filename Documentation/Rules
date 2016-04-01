@@ -1,10 +1,14 @@
 Dice game rule ideas:
 
--If options are 1, 2, or 3 six sided dice (numbered 1-6) and a 20-sided die (numbered 1-20), 
- 3 dice and 20 sided options would be redundant and the only difference between their highest possible values is 2
+-Goal of game is to reach a predetermined score using a maximum of three six-sided dice.
 
--Perhaps should stick to options of 1, 2, or 3 6-sided dice (Eliminates redundancy and simplifies GUI)
+-Player can choose to use as many of the available dice for personal rolls.
 
--Use of 3 dice would create penalty that you would have to use a single die for say, your next 3 turns.
+-Player can choose to have the roll count against opponents score (will incur penalty on future rolls).
 
--If the number rolled is greater than what you need to reach the target value, the number of that roll will not be added to the current score
+-If the number rolled is greater than what you need to reach the target value, the number of that roll will not 
+be added to the current score.
+
+-Perhaps there should be additional conditions for when the players are very close to winning?
+
+
