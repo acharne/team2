@@ -58,17 +58,17 @@ public class Player
 	
 public static class PlayerClass{
 	String name;
-	statistics stat;
+	Statistics stat;
 	public PlayerClass()
 	{
 		name = "";
-		stat = new statistics();
+		stat = new Statistics();
 	}
 	
 	public PlayerClass(String newName)
 	{
 		name = newName;
-		stat = new statistics();
+		stat = new Statistics();
 	}
 	
 	public void setName(String thisName)
@@ -80,11 +80,10 @@ public static class PlayerClass{
 	{
 		return name;
 	}
-	//player stat methods (more added in future for specific stats)
-	public int getStat()
+	//player stat methods to be used straight from the Stats Class, use this method to access stats for any player
+	public Statistics getStats()
 	{
-		return stat.getStats();
+		return stat;
 	}
-	
-	}
+}
 }
