@@ -1,0 +1,175 @@
+public class Game {
+	int currentRollValue;
+	int selectionP1;
+	int selectionP2;
+	int turn;
+	int p1goal;
+	int p2goal;
+	public Player list;
+	
+	public Game()
+	{
+		list = new Player();
+	}
+	public int returnCurrentRoll()
+	{
+		return currentRollValue;
+	}
+	public int getTurnCount()
+	{
+		return turn;
+	}
+	public int getPlayerOnePoints()
+	{
+		return p1goal;
+	}
+	public int getPlayerTwoPoints()
+	{
+		return p2goal;
+	}
+	public void addPlayer(String name)
+	{
+		list.addPlayer(list.createPlayer(name));
+	}
+	public boolean searchForPlayer(String name)//does this player exist? T/F
+	{
+		boolean exists = false;
+		if(list.searchPlayer(name) != -1)
+		{
+			exists = true;
+		}
+		return exists;
+	}
+	public String findStats(String name)
+	{
+		String listOfStats = "";
+		if (searchForPlayer(name) == true)
+		{
+			listOfStats = list.getList().get(list.searchPlayer(name)).getStats().toString();
+		}
+		return listOfStats;
+	}
+	public boolean isEven(int num)
+	{
+		if(num%2 == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public void selectPlayerOne(String name)// return position in list of p1
+	{
+		selectionP1 = list.searchPlayer(name);
+	}
+	public void selectPlayerTwo(String name)// return position in list of p2
+	{
+		selectionP2 = list.searchPlayer(name);
+	}
+	//initiate game
+	public void gameVsPlayer(String p1, String p2)
+	{
+		int p1penaltyTurns = 0;
+		int p2penaltyTurns = 0;
+		int choice = -1;// must be determined by actionListener for the button in the game each turn
+		turn = 1;
+		p1goal = 100;
+		p2goal = 100;
+		dice diceRoll = new dice();
+		
+		selectPlayerOne(p1);
+		selectPlayerTwo(p2);
+		
+		while(p1goal != 0 || p2goal != 0)
+		{
+			if(isEven(turn) == false)// player 1 turn
+			{
+				//calculate choice here via actionListener
+				if (choice == 0)// choose to roll dice to subtract from own score
+				{
+					currentRollValue = diceRoll.roll();
+					if((p1goal - currentRollValue) > 0)
+					{
+						p1goal = p1goal - currentRollValue;
+					}
+				}
+				else if (choice == 1)// choose to roll penalty dice to add to opponent score
+				{
+					if(p1penaltyTurns == 0)
+					{
+						p1penaltyTurns = 1;
+						p2goal += currentRollValue;
+					}
+				}
+				turn++;
+				if(p1penaltyTurns > 0)
+				{
+					p1penaltyTurns --;
+				}
+			}
+			else// player 2 turn
+			{
+				//calculate choice here via actionListener
+				currentRollValue = diceRoll.roll();
+				if((p2goal - currentRollValue) > 0)
+				{
+					p2goal = p2goal - currentRollValue;
+				}
+				else if (choice == 1)// choose to roll penalty dice to add to opponent score
+				{
+					if(p2penaltyTurns == 0)
+					{
+						p2penaltyTurns = 3;
+						p1goal += currentRollValue;
+					}
+				}
+				turn++;
+				if(p2penaltyTurns > 0)
+				{
+					p2penaltyTurns --;
+				}
+			}
+		}//game ended, update stats data now
+		if(p1goal == 0)// p1 won, p2 lost update stats.
+		{
+			list.getList().get(selectionP1).getStats().incrementGamesWon();
+			list.getList().get(selectionP1).getStats().incrementGamesPlayed();
+			list.getList().get(selectionP2).getStats().incrementGamesPlayed();
+			list.getList().get(selectionP2).getStats().incrementGamesLost();
+			//if turns is < current record for lowest rolls, update
+			if(list.getList().get(selectionP1).getStats().getLowestRolls() > turn)
+			{
+				list.getList().get(selectionP1).getStats().setLowestRolls(turn);
+			}
+			if(list.getList().get(selectionP1).getStats().getHighestRolls() < turn)
+			{
+				list.getList().get(selectionP1).getStats().setHighestRolls(turn);
+			}
+			
+		}
+		if(p1goal == 0)//p2 won, p1 lost
+		{
+			list.getList().get(selectionP1).getStats().incrementGamesPlayed();
+			list.getList().get(selectionP1).getStats().incrementGamesLost();
+			list.getList().get(selectionP2).getStats().incrementGamesPlayed();
+			list.getList().get(selectionP2).getStats().incrementGamesWon();
+			//if turns is < current record for lowest rolls, update
+			if(list.getList().get(selectionP2).getStats().getLowestRolls() > turn)
+			{
+				list.getList().get(selectionP2).getStats().setLowestRolls(turn);
+			}
+			if(list.getList().get(selectionP2).getStats().getHighestRolls() < turn)
+			{
+				list.getList().get(selectionP2).getStats().setHighestRolls(turn);
+			}
+		}
+		
+	}//end entire game
+	
+	public void gameVsComputer()
+	{
+		
+	}
+}
