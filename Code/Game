@@ -99,7 +99,7 @@ public class Game {
 				{
 					if(p1penaltyTurns == 0)
 					{
-						p1penaltyTurns = 1;
+						p1penaltyTurns = 3;
 						p2goal += currentRollValue;
 					}
 				}
