@@ -5,11 +5,22 @@ public class Game {
 	int turn;
 	int p1goal;
 	int p2goal;
+	int p1penaltyTurns;
+	int p2penaltyTurns;
+	int choice;
 	public Player list;
 	
 	public Game()
 	{
 		list = new Player();
+	}
+	public int getP1PenaltyTurns()
+	{
+		return p1penaltyTurns;
+	}
+	public int getP2PenaltyTurns()
+	{
+		return p2penaltyTurns;
 	}
 	public int returnCurrentRoll()
 	{
@@ -71,9 +82,9 @@ public class Game {
 	//initiate game
 	public void gameVsPlayer(String p1, String p2)
 	{
-		int p1penaltyTurns = 0;
-		int p2penaltyTurns = 0;
-		int choice = -1;// must be determined by actionListener for the button in the game each turn
+		p1penaltyTurns = 0;
+		p2penaltyTurns = 0;
+		choice = -1;// must be determined by actionListener for the button in the game each turn
 		turn = 1;
 		p1goal = 100;
 		p2goal = 100;
