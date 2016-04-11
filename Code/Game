@@ -101,7 +101,7 @@ public class Game {
 				if (choice == 0)// choose to roll dice to subtract from own score
 				{
 					currentRollValue = diceRoll.roll();
-					if((p1goal - currentRollValue) > 0)
+					if((p1goal - currentRollValue) >= 0)
 					{
 						p1goal = p1goal - currentRollValue;
 					}
@@ -124,7 +124,7 @@ public class Game {
 			{
 				//calculate choice here via actionListener
 				currentRollValue = diceRoll.roll();
-				if((p2goal - currentRollValue) > 0)
+				if((p2goal - currentRollValue) >= 0)
 				{
 					p2goal = p2goal - currentRollValue;
 				}
