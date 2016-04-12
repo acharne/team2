@@ -160,7 +160,7 @@ public class Game {
 			}
 			
 		}
-		if(p1goal == 0)//p2 won, p1 lost
+		if(p2goal == 0)//p2 won, p1 lost
 		{
 			list.getList().get(selectionP1).getStats().incrementGamesPlayed();
 			list.getList().get(selectionP1).getStats().incrementGamesLost();
