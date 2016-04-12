@@ -123,10 +123,13 @@ public class Game {
 			else// player 2 turn
 			{
 				//calculate choice here via actionListener
-				currentRollValue = diceRoll.roll();
-				if((p2goal - currentRollValue) >= 0)
+				if(choice == 0)
 				{
-					p2goal = p2goal - currentRollValue;
+					currentRollValue = diceRoll.roll();
+					if((p2goal - currentRollValue) >= 0)
+					{
+						p2goal = p2goal - currentRollValue;
+					}
 				}
 				else if (choice == 1)// choose to roll penalty dice to add to opponent score
 				{
@@ -160,7 +163,7 @@ public class Game {
 			}
 			
 		}
-		if(p2goal == 0)//p2 won, p1 lost
+		if(p1goal == 0)//p2 won, p1 lost
 		{
 			list.getList().get(selectionP1).getStats().incrementGamesPlayed();
 			list.getList().get(selectionP1).getStats().incrementGamesLost();
@@ -179,8 +182,96 @@ public class Game {
 		
 	}//end entire game
 	
-	public void gameVsComputer()
+	public void gameVsComputer(String name)
 	{
+		p1penaltyTurns = 0;
+		p2penaltyTurns = 0;//aka computer
+		choice = -1;// must be determined by actionListener for the button in the game each turn(only for the player)
+		turn = 1;
+		p1goal = 100;
+		p2goal = 100;//aka computer
+		dice diceRoll = new dice();
+		
+		selectPlayerOne(name);
+
+		
+		while(p1goal != 0 || p2goal != 0)
+		{
+			if(isEven(turn) == false)// player 1 turn
+			{
+				//calculate choice here via actionListener
+				if (choice == 0)// choose to roll dice to subtract from own score
+				{
+					currentRollValue = diceRoll.roll();
+					if((p1goal - currentRollValue) >= 0)
+					{
+						p1goal = p1goal - currentRollValue;
+					}
+				}
+				else if (choice == 1)// choose to roll penalty dice to add to opponent score
+				{
+					if(p1penaltyTurns == 0)
+					{
+						p1penaltyTurns = 3;
+						p2goal += currentRollValue;
+					}
+				}
+				turn++;
+				if(p1penaltyTurns > 0)
+				{
+					p1penaltyTurns --;
+				}
+			}
+			else// Computer's turn
+			{
+				//calculate choice here via intel
+				if(p1goal < 20)
+				{
+					choice = 1;
+				}
+				else
+				{
+					choice = 0;
+				}
+				//end choice logic
+				currentRollValue = diceRoll.roll();
+				if(choice == 0)
+				{
+					if((p2goal - currentRollValue) >= 0)
+					{
+						p2goal = p2goal - currentRollValue;
+					}
+				}
+				else if (choice == 1)// choose to roll penalty dice to add to opponent score
+				{
+					if(p2penaltyTurns == 0)
+					{
+						p2penaltyTurns = 3;
+						p1goal += currentRollValue;
+					}
+				}
+				turn++;
+				if(p2penaltyTurns > 0)
+				{
+					p2penaltyTurns --;
+				}
+			}
+		}//game ended, update stats data now
+		if(p1goal == 0)// p1 won, computer lost update stats.
+		{
+			list.getList().get(selectionP1).getStats().incrementGamesWon();
+			list.getList().get(selectionP1).getStats().incrementGamesPlayed();
+			//if turns is < current record for lowest rolls, update
+			if(list.getList().get(selectionP1).getStats().getLowestRolls() > turn)
+			{
+				list.getList().get(selectionP1).getStats().setLowestRolls(turn);
+			}
+			if(list.getList().get(selectionP1).getStats().getHighestRolls() < turn)
+			{
+				list.getList().get(selectionP1).getStats().setHighestRolls(turn);
+			}
+			
+		}
 		
 	}
 }
