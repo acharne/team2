@@ -1,0 +1,91 @@
+package Dice_Game;
+
+import java.util.ArrayList;
+
+public class Player
+{
+	static ArrayList<PlayerClass> playerList;
+	public Player()
+	{
+		playerList = new ArrayList<PlayerClass>();
+	}
+	public void addPlayer(PlayerClass addMe)
+	{
+		playerList.add(addMe);
+	}
+	public void deletePlayer(String deleteMe)
+	{
+		int pos = searchPlayer(deleteMe);
+		if (pos != -1)
+		{
+			playerList.remove(pos);
+		}
+	}
+	public int searchPlayer(String name)
+	{
+		int pos = -1;
+		for (int index = 0; index < playerList.size(); index++)
+		{
+			if(playerList.get(index).getName().equals(name))
+			{
+				pos = index;
+			}
+		}
+		return pos;
+	}
+	public ArrayList<PlayerClass> getList()
+	{
+		return playerList;
+	}
+	public PlayerClass createPlayer()
+	{
+		PlayerClass p1 = new PlayerClass();
+		return p1;
+	}
+	public PlayerClass createPlayer(String name)
+	{
+		PlayerClass p1 = new PlayerClass(name);
+		return p1;
+	}
+	public String print()
+	{
+		String result = "";
+		for (int index = 0; index < playerList.size(); index++)
+		{
+			result += playerList.get(index).getName() + " ";
+		}
+		return result;
+	}
+	
+	
+public static class PlayerClass{
+	String name;
+	Statistics stat;
+	public PlayerClass()
+	{
+		name = "";
+		stat = new Statistics();
+	}
+	
+	public PlayerClass(String newName)
+	{
+		name = newName;
+		stat = new Statistics();
+	}
+	
+	public void setName(String thisName)
+	{
+		name = thisName;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	//player stat methods to be used straight from the Stats Class, use this method to access stats for any player
+	public Statistics getStats()
+	{
+		return stat;
+	}
+}
+}

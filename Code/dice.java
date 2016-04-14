@@ -1,27 +1,62 @@
+package Dice_Game;
+
 import java.util.Random;
 
-public class Dice 
+public class dice 
 {
 	
-	int face;
+	int face[];
 	Random rand;
 
-	public Dice ()
+	public dice ()
 	{
 
-		face = 0;
+		face = new int[3];
 		rand = new Random();
 		
 	}
 	
-	public int roll()
+	public int[] roll(int numDice)
 	{
-
-		face = rand.nextInt(6);
-		face++;
+		for (int rollIndex = 0; rollIndex < numDice; rollIndex++)
+		{
+			face[rollIndex] = rand.nextInt(6) + 1;
+		}
 		
 		return face;
 		
+	}
+	
+	public int sum(int faces)
+	{
+		int sum = 0;
+		
+		for (int faceValue = 0; faceValue < faces; faceValue++)
+		{
+			sum += face[faceValue];
+		}
+		
+		return sum;
+	}
+	
+	public int computerDice(int score)
+	{
+		int dice = 0;
+		
+		if(score > 20)
+		{
+			dice = 3;
+		}
+		else if(score < 20 && score > 8)
+		{
+			dice = 2;
+		}
+		else
+		{
+			dice = 1;
+		}
+		
+		return dice;
 	}
 	
 }
