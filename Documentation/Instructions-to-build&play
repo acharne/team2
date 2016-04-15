@@ -1,0 +1,4 @@
+1. Navigate to the Text-Based-Game branch of the project.
+2. Download the files: GameWithoutGUI.java, Player.java, Dice.java, and Statistics.java and place them into the same project workspace.
+2. Run the files, (GameWithoutGUI) has the main class that will execute.
+3. Play the game! (GUI not implemented yet).
