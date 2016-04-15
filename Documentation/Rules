@@ -11,4 +11,5 @@ be added to the current score.
 
 -Perhaps there should be additional conditions for when the players are very close to winning?
 
-
+-Player wins when their goal goes from the starting value to 0. At the end, you must roll the exact value to win (ex: 7 points left, if you roll > 7, no points are taken off)
+-Player loses when their opponent wins.
