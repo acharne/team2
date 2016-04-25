@@ -1,7 +1,16 @@
 package Dice_Game;
 
-public class Statistics {
+import java.io.Serializable;
+import java.util.Comparator;
+
+import Dice_Game.Player.PlayerClass;
+
+public class Statistics implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int gamesPlayed;
 	private int gamesWon;
 	private int gamesLost;
@@ -67,11 +76,12 @@ public class Statistics {
 		return highestRolls;
 	}
 	
+	
 	public String toString()
 	{
 		return "You've played " + gamesPlayed + " games with a record of " + gamesWon + 
-				" wins and " + gamesLost + " losses. You're best game used " + lowestRolls + 
-				" rolls and you're worst game used " + highestRolls + " rolls";
+				" wins and " + gamesLost + " losses. \nYou're best game used " + lowestRolls + 
+				" rolls and you're worst game used " + highestRolls + " rolls.";
 	}
 
 }
